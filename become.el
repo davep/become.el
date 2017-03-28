@@ -32,6 +32,19 @@
   (interactive)
   (set-buffer-file-coding-system 'mac))
 
+;;;###autoload
+(defun become-freshly-indented ()
+  "Apply indentation to whole buffer."
+  (interactive)
+  (indent-region (point-min) (point-max) nil))
+
+;;;###autoload
+(defun become-freshly-indented-no-tabs ()
+  "Apply indentation to whole buffer and then untabify."
+  (interactive)
+  (indent-buffer)
+  (untabify (point-min) (point-max)))
+
 (provide 'become)
 
 ;;; become.el ends here
