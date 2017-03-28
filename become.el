@@ -1,18 +1,22 @@
-;;; become.el --- Tools for switching buffer encoding type.
+;;; become.el --- Tools for transforming a buffer.
 ;; Copyright 2017 by Dave Pearson <davep@davep.org>
 
 ;; Author: Dave Pearson <davep@davep.org>
 ;; Version: 1.0
 ;; Keywords: convenience
 ;; URL: https://github.com/davep/become.el
+;; Package-Requires: ((cl-lib "0.5"))
 
 ;;; Commentary:
 ;;
-;; become.el provides a set of interactive functions that allow easy
-;; switching between the text file encoding systems used on the operating
-;; systems I use most.
+;; become.el provides a set of interactive functions that allow for easy
+;; transformation of the current buffer.
 
 ;;; Code:
+
+;; Things we need:
+(eval-when-compile
+  (require 'cl-lib))
 
 ;;;###autoload
 (defun become-dos-buffer ()
@@ -55,6 +59,23 @@
   (interactive)
   (indent-buffer)
   (untabify (point-min) (point-max)))
+
+;;;###autoload
+(defun become-free-of-trailing-whitespace ()
+  "Remove all trailing whitespace from all lines in the current buffer.
+
+Note that this function makes a point of not stripping the trailing space
+from a signature seperator line."
+  (interactive)
+  (cl-flet ((is-sig-line ()
+              (save-excursion
+                (beginning-of-line)
+                (looking-at "^-- $"))))
+    (save-excursion
+      (setf (point) (point-min))
+      (while (re-search-forward "[ \t\r]+$" nil t)
+        (unless (is-sig-line)
+          (replace-match "" nil nil))))))
 
 (provide 'become)
 
