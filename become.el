@@ -38,12 +38,15 @@
 
 ;;;###autoload
 (defun become-undosly ()
-  "Strip current buffer of DOS end-of-line markers."
+  "Strip current buffer of DOS line end markers."
   (interactive)
   (save-excursion
     (setf (point) (point-min))
-    (replace-string "\015" "")
-    (replace-string "\032" "")
+    (while (search-forward "\015" nil t)
+      (replace-match "" nil nil))
+    (setf (point) (point-min))
+    (while (search-forward "\032" nil t)
+      (replace-match "" nil nil))
     (when (called-interactively-p 'interactive)
       (message "Buffer is now sane"))))
 
