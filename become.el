@@ -44,7 +44,7 @@
     (setf (point) (point-min))
     (replace-string "\015" "")
     (replace-string "\032" "")
-    (when (interactive-p)
+    (when (called-interactively-p 'interactive)
       (message "Buffer is now sane"))))
 
 ;;;###autoload
