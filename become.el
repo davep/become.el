@@ -33,6 +33,17 @@
   (set-buffer-file-coding-system 'mac))
 
 ;;;###autoload
+(defun become-undosly ()
+  "Strip current buffer of DOS end-of-line markers."
+  (interactive)
+  (save-excursion
+    (setf (point) (point-min))
+    (replace-string "\015" "")
+    (replace-string "\032" "")
+    (when (interactive-p)
+      (message "Buffer is now sane"))))
+
+;;;###autoload
 (defun become-freshly-indented ()
   "Apply indentation to whole buffer."
   (interactive)
