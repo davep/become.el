@@ -60,7 +60,7 @@
 (defun become-freshly-indented-no-tabs ()
   "Apply indentation to whole buffer and then untabify."
   (interactive)
-  (indent-buffer)
+  (become-freshly-indented)
   (untabify (point-min) (point-max)))
 
 ;;;###autoload
