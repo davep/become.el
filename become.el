@@ -85,13 +85,14 @@ trailing space from a signature separator line, or double
 trailing spaces at the very end of a line in a markdown file."
   (interactive)
   (cl-flet ((is-sig-line ()
-              (save-excursion
-                (beginning-of-line)
-                (looking-at "^-- $")))
+                         (save-excursion
+                           (beginning-of-line)
+                           (looking-at "^-- $")))
             (markdown-br-p ()
-               (save-excursion
-                 (beginning-of-line)
-                 (and (eq major-mode 'markdown-mode) (looking-at "^.+[^ ]  $")))))
+                           (save-excursion
+                             (beginning-of-line)
+                             (and (eq major-mode 'markdown-mode)
+                                  (looking-at "^.+[^ ]  $")))))
     (save-excursion
       (setf (point) (point-min))
       (while (re-search-forward "[ \t\r]+$" nil t)
