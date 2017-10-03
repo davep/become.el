@@ -80,17 +80,22 @@
 (defun become-free-of-trailing-whitespace ()
   "Remove all trailing whitespace from all lines in the current buffer.
 
-Note that this function makes a point of not stripping the trailing space
-from a signature separator line."
+Note that this function makes a point of not stripping the
+trailing space from a signature separator line, or double
+trailing spaces at the very end of a line in a markdown file."
   (interactive)
   (cl-flet ((is-sig-line ()
               (save-excursion
                 (beginning-of-line)
-                (looking-at "^-- $"))))
+                (looking-at "^-- $")))
+            (markdown-br-p ()
+               (save-excursion
+                 (beginning-of-line)
+                 (and (eq major-mode 'markdown-mode) (looking-at "^.+[^ ]  $")))))
     (save-excursion
       (setf (point) (point-min))
       (while (re-search-forward "[ \t\r]+$" nil t)
-        (unless (is-sig-line)
+        (unless (or (is-sig-line) (markdown-br-p))
           (replace-match "" nil nil))))))
 
 (provide 'become)
