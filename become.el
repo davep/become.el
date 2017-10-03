@@ -81,7 +81,7 @@
   "Remove all trailing whitespace from all lines in the current buffer.
 
 Note that this function makes a point of not stripping the trailing space
-from a signature seperator line."
+from a signature separator line."
   (interactive)
   (cl-flet ((is-sig-line ()
               (save-excursion
