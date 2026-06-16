@@ -54,10 +54,10 @@
   "Strip current buffer of DOS line end markers."
   (interactive)
   (save-excursion
-    (setf (point) (point-min))
+    (goto-char (point-min))
     (while (search-forward "\015" nil t)
       (replace-match "" nil nil))
-    (setf (point) (point-min))
+    (goto-char (point-min))
     (while (search-forward "\032" nil t)
       (replace-match "" nil nil))
     (when (called-interactively-p 'interactive)
@@ -94,7 +94,7 @@ trailing spaces at the very end of a line in a markdown file."
                              (and (eq major-mode 'markdown-mode)
                                   (looking-at "^.+[^ ]  $")))))
     (save-excursion
-      (setf (point) (point-min))
+      (goto-char (point-min))
       (while (re-search-forward "[ \t\r]+$" nil t)
         (unless (or (is-sig-line) (markdown-br-p))
           (replace-match "" nil nil))))))
