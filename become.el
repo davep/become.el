@@ -1,8 +1,8 @@
 ;;; become.el --- Tools for transforming a buffer  -*- lexical-binding: t; -*-
-;; Copyright 2017 by Dave Pearson <davep@davep.org>
+;; Copyright 2017-2026 by Dave Pearson <davep@davep.org>
 
 ;; Author: Dave Pearson <davep@davep.org>
-;; Version: 1.3
+;; Version: 1.4.0
 ;; Keywords: convenience
 ;; URL: https://github.com/davep/become.el
 ;; Package-Requires: ((emacs "24.1") (cl-lib "0.5"))
