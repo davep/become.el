@@ -61,7 +61,7 @@
     (while (search-forward "\032" nil t)
       (replace-match "" nil nil))
     (when (called-interactively-p 'interactive)
-      (message "Buffer is now sane"))))
+      (message "Buffer is now undosly"))))
 
 ;;;###autoload
 (defun become-freshly-indented ()
