@@ -1,11 +1,11 @@
-;;; become.el --- Tools for transforming a buffer.
+;;; become.el --- Tools for transforming a buffer  -*- lexical-binding: t; -*-
 ;; Copyright 2017 by Dave Pearson <davep@davep.org>
 
 ;; Author: Dave Pearson <davep@davep.org>
 ;; Version: 1.3
 ;; Keywords: convenience
 ;; URL: https://github.com/davep/become.el
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((emacs "24.1") (cl-lib "0.5"))
 
 ;; This program is free software: you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by the
@@ -54,14 +54,14 @@
   "Strip current buffer of DOS line end markers."
   (interactive)
   (save-excursion
-    (setf (point) (point-min))
+    (goto-char (point-min))
     (while (search-forward "\015" nil t)
       (replace-match "" nil nil))
-    (setf (point) (point-min))
+    (goto-char (point-min))
     (while (search-forward "\032" nil t)
       (replace-match "" nil nil))
     (when (called-interactively-p 'interactive)
-      (message "Buffer is now sane"))))
+      (message "Buffer is now undosly"))))
 
 ;;;###autoload
 (defun become-freshly-indented ()
@@ -94,7 +94,7 @@ trailing spaces at the very end of a line in a markdown file."
                              (and (eq major-mode 'markdown-mode)
                                   (looking-at "^.+[^ ]  $")))))
     (save-excursion
-      (setf (point) (point-min))
+      (goto-char (point-min))
       (while (re-search-forward "[ \t\r]+$" nil t)
         (unless (or (is-sig-line) (markdown-br-p))
           (replace-match "" nil nil))))))
