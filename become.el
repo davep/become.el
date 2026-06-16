@@ -5,7 +5,7 @@
 ;; Version: 1.3
 ;; Keywords: convenience
 ;; URL: https://github.com/davep/become.el
-;; Package-Requires: ((cl-lib "0.5"))
+;; Package-Requires: ((emacs "24.1") (cl-lib "0.5"))
 
 ;; This program is free software: you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by the
